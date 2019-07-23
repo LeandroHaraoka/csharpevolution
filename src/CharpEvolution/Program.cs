@@ -1,4 +1,5 @@
 ﻿using System;
+using CsharpEvolution.Tests01;
 
 namespace CharpEvolution
 {
@@ -6,7 +7,7 @@ namespace CharpEvolution
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Calculator.SimpleCalculator();
         }
     }
 }
