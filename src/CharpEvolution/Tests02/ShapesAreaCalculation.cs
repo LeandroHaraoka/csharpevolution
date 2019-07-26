@@ -4,11 +4,11 @@ using System.Text;
 
 namespace CsharpEvolution.Tests02
 {
-    public class GetShapesArea : IGetShapesArea
+    public class ShapesAreaCalculation : IShapesAreaCalculation
     {
         private readonly ICalculatorValidation _calculatorValidation;
 
-        public GetShapesArea(ICalculatorValidation calculatorValidation)
+        public ShapesAreaCalculation(ICalculatorValidation calculatorValidation)
         {
             _calculatorValidation = calculatorValidation;
         }
