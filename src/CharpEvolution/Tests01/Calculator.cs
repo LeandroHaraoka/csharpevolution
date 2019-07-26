@@ -34,7 +34,7 @@ namespace CsharpEvolution.Tests01
                 }
 
                 Console.WriteLine(firstNumber + " " + operand + " " + secondNumber + " = " + answer);
-                Console.WriteLine("\n\nDo you want to break (Y/N)");
+                Console.WriteLine("\n\nDo you want to break (Y/N)?");
                 ConsoleKeyInfo status = Console.ReadKey();
 
                 if (status.Key == ConsoleKey.Y)
