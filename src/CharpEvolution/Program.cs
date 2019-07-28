@@ -18,8 +18,8 @@ namespace CharpEvolution
                 .AddSingleton<ComplexCalculator>()
                 .BuildServiceProvider();
 
-            var teste = serviceProvider.GetService<ComplexCalculator>();
-            teste.ComplexCalculatorOperations();
+            var openCalculator = serviceProvider.GetService<ComplexCalculator>();
+            openCalculator.ComplexCalculatorOperations();
         }
     }
 }
