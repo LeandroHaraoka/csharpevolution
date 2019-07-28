@@ -1,57 +1,61 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using CsharpEvolution.Tests02.Interfaces;
 
 namespace CsharpEvolution.Tests02
 {
     public class ComplexCalculator
     {
         private readonly IShapesAreaCalculation _shapesAreaCalculation;
+        private readonly IBasicCalculations _basicCalculations;
 
-        public ComplexCalculator(IShapesAreaCalculation shapesAreaCalculation)
+        public ComplexCalculator(IShapesAreaCalculation shapesAreaCalculation,
+                                 IBasicCalculations basicCalculations)
         {
             _shapesAreaCalculation = shapesAreaCalculation;
+            _basicCalculations = basicCalculations;
         }
         public void ComplexCalculatorOperations()
         {
-            double firstNumber = 0;
-            double secondNumber = 0;
-            double answer = 0;
-            double complexNumber = 0;
-
             while (true)
             {
                 Console.Write("Please enter an operand (+, -, /, *)" +
                               "\nOr for Square Root (SR)" +
                               "\nOr Cubic Root (CR):" +
                               "\nOr Power of number (PN)" +
+                              "\nOr Rest (R)" +
                               "\nOr Square Area (SA)" +
                               "\nOr Triangle Area (TA)" +
                               "\nOr Circle Area (CA)" +
-                              "\nOr Rectangle Area (RA):\n");
+                              "\nOr Rectangle Area (RA):\n\n");
                 var operand = Console.ReadLine();
 
-                switch (operand)
+                switch (operand.ToUpper())
                 {
                     case "-":
-                        answer = firstNumber - secondNumber;
+                        _basicCalculations.Subtraction();
                         break;
                     case "+":
-                        answer = firstNumber + secondNumber;
+                        _basicCalculations.Addition();
                         break;
                     case "/":
-                        answer = firstNumber / secondNumber;
+                        _basicCalculations.Division();
                         break;
                     case "*":
-                        answer = firstNumber * secondNumber;
+                        _basicCalculations.Multiplication();
+                        break;
+                    case "R":
+                        _basicCalculations.Rest();
                         break;
                     case "SR":
-                        answer = Math.Sqrt(complexNumber);
+                        _basicCalculations.SquareRoot();
                         break;
                     case "CR":
-                        answer = Math.Ceiling(Math.Pow(complexNumber, (double)1 / 3));
+                        _basicCalculations.CubicRoot();
                         break;
                     case "PN":
-                        answer = Math.Pow(firstNumber, secondNumber);
+                        _basicCalculations.PowerOfNumber();
                         break;
                     case "SA":
                         _shapesAreaCalculation.GetSquareArea();
@@ -66,13 +70,8 @@ namespace CsharpEvolution.Tests02
                         _shapesAreaCalculation.GetRectangleArea();
                         break;
                     default:
-                        answer = 0;
+                        Console.WriteLine("\nInvalid input.");
                         break;
-                }
-
-                if (answer != 0)
-                {
-                    Console.WriteLine(firstNumber + " " + operand + " " + secondNumber + " = " + answer);
                 }
 
                 Console.WriteLine("\n\nDo you want to break? (Y/N)");
@@ -83,6 +82,7 @@ namespace CsharpEvolution.Tests02
                     break;
                 }
                 Console.Clear();
+
             }
         }
     }
