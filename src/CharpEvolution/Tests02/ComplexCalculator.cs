@@ -28,7 +28,12 @@ namespace CsharpEvolution.Tests02
                               "\nOr Square Area (SA)" +
                               "\nOr Triangle Area (TA)" +
                               "\nOr Circle Area (CA)" +
-                              "\nOr Rectangle Area (RA):\n\n");
+                              "\nOr Rectangle Area (RA)" +
+                              "\nOr to convert to Hexadecimal (H)" +
+                              "\nOr to convert to Decimal (D)" +
+                              "\nOr to convert to Binary (B)" +
+                              "\nOr to convert to Octal (OC)" +
+                              ":\n\n");
                 var operand = Console.ReadLine();
 
                 switch (operand.ToUpper())
@@ -68,6 +73,9 @@ namespace CsharpEvolution.Tests02
                         break;
                     case "RA":
                         _shapesAreaCalculation.GetRectangleArea();
+                        break;
+                    case "H":
+                        _basicCalculations.ConvertToHexadecimal();
                         break;
                     default:
                         Console.WriteLine("\nInvalid input.");

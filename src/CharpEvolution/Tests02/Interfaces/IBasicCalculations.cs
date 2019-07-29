@@ -18,6 +18,12 @@
 
         void PowerOfNumber();
 
+        void ConvertToHexadecimal();
 
+        void ConvertToDecimal();
+
+        void ConvertToBinary();
+
+        void ConvertToOctal();
     }
 }
