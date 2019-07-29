@@ -1,1 +1,1 @@
-﻿
+﻿> **Desafio Semana 01** - Criar um roteiro básico e gravar um resumo **em áudio** da semana (>= 20min), passando por cada tópico em sequência.
