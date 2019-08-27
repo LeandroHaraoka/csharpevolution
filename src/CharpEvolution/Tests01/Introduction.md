@@ -89,3 +89,28 @@ Na criação de um objeto garante-se memória para alocação em *heap* e a vari
 ### Structs
 
 Diferente das classes, structs herdam diretamente de ValueTypes. Isso quer dizer que, ao criar um objeto, seu conteúdo é alocado em *stack*, e não há referências, como acontece nas classes. Portanto, quando copiamos o valor de uma instância para outra, os objetos são independentes e as alterações em um deles não influencia no outro.
+
+### Types in C#
+
+Existem duas categorias de tipos em C#. Reference e value types.
+
+#### Reference Types
+Nos Reference types, quando atrelamos uma variavel a um determinado objeto, estamos direcionando o ponteiro dela para o endereco onde esta instancia se encontra. Em outras palavras, registramos um endereco de memoria no qual o objeto se encontra. Sendo assim, varias variaveis podem apontar para o mesmo objeto. Quando realizamos operacoes em uma delas, estamos impactando todas as outras que referenciam o mesmo objeto. Alguns exemplos de reference types em C#: dynamics, string, object.
+
+#### Value Types
+Nos Value types, cada variavel carrega consigo as informacoes do objeto. Sendo assim, quando realizamos operacoes em uma variavel, nao ha impacto em nenhuma outra instancia, alteramos apenas o estado do seu proprio conteudo. Alguns exemplos de value types em C#: int, long, double, float, bool, decimal, char, enum, struct. Todos os value types derivam de System.ValueType.
+
+https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types
+https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/value-types
+
+### Access Modifiers
+Em C#, os tipos  e membros (subclasses e metodos) possuem modificadores de acesso. A ideia dessa ferramenta e configurar o nivel de exposicao dos tipos e membros. Em outras palavras, podemos usa-la para permitir ou nao o uso deles em outros trechos de codigo do projeto.
+Os modificadores de acesso existentes sao:
+|Modificador de acesso|  Descricao|
+|--|--|
+|public| Torna acessivel para qualquer codigo do mesmo assembly e de qualquer outro que referencie este.|
+|internal| Torna acessivel apenas para codigo do mesmo assembly.|
+|protected| Torna acessivel dentro da class na qual esta contido e dentro de todas as outras que herdam esta.|
+|protected internal| Torna acessivel para codigo do mesmo assembly e codigo de outra classe herdeira contida em outro assembly.
+|private| Torna acessivel dentro da class/struct na qual esta contido.|
+|private protected| Torna acessivel dentro da class na qual esta contido e dentro das que herdam esta, desde que estejam no mesmo assembly.
