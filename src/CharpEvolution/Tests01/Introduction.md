@@ -114,3 +114,12 @@ Os modificadores de acesso existentes sao:
 |protected internal| Torna acessivel para codigo do mesmo assembly e codigo de outra classe herdeira contida em outro assembly.
 |private| Torna acessivel dentro da class/struct na qual esta contido.|
 |private protected| Torna acessivel dentro da class na qual esta contido e dentro das que herdam esta, desde que estejam no mesmo assembly.
+
+## Sintaxe Básica 02
+
+### Construtores
+Um construtor é um tipo especial de método responsável por configurar a inicialização de objetos. É com base nessa configuração que as classes e structs são instanciadas. 
+
+Caso um construtor não seja definido, o C# atribui os respectivos valores default para o tipo de classe/struct e para seus membros.
+
+O construtor pode também ser estático e com a função de iniciar os valores dos membros estáticos de um tipo. Neste caso, não há parâmetros no método.
