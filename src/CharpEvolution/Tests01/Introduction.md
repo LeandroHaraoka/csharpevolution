@@ -122,4 +122,23 @@ Um construtor é um tipo especial de método responsável por configurar a inici
 
 Caso um construtor não seja definido, o C# atribui os respectivos valores default para o tipo de classe/struct e para seus membros.
 
-O construtor pode também ser estático e com a função de iniciar os valores dos membros estáticos de um tipo. Neste caso, não há parâmetros no método.
+#### Construtores de instância
+
+Além do comportamento descrito acima, um construtor de instância pode pode ser utilizado para chamar construtores de instância de base classes.
+
+    class Circle : Shape 
+    {
+          public Circle(double radius) 
+	          : base(radius, 0)
+         {
+         } 
+    }
+    
+#### Construtores privados
+Em classes onde todos os membros costuma-se encontrar construtores privados. Estes construtores possuem a função de impedir a instanciação dessas classes. Uma classe que possui apenas construtores privados, não pode ser instanciada e nem herdade por nenhuma outra classe (exceto em classes aninhadas).
+
+#### Construtores estáticos
+
+Um construtor pode ser do tipo estático. Neste caso, utiliza-se o construtor para iniciar os valores dos membros estáticos de uma classe ou struct .Construtores estáticos são parameterless.
+
+Durante toda a execução da aplicação, o método do construtor estático é invocado uma única vez, antes da criação da primeira instância da classe ou antes que um membro estático seja referenciado. 
