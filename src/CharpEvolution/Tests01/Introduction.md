@@ -144,3 +144,64 @@ Em classes onde todos os membros são estáticos costuma-se encontrar construtor
 Um construtor pode ser do tipo estático. Neste caso, utiliza-se o construtor para iniciar os valores dos membros estáticos de uma classe ou struct .Construtores estáticos são parameterless.
 
 Durante toda a execução da aplicação, o método do construtor estático é invocado uma única vez, antes da criação da primeira instância da classe ou antes que um membro estático seja referenciado. 
+
+### Destrutores
+A destruição de uma instância de determinada classe é configurada pelo método definido no seu respectivo destrutor. Tal método é único e parameterless. 
+
+O método do destrutor não pode ser chamado explicitamente. Sua execução ocorre de forma automática no momento em que uma instância se torna elegível para destruição. Isso ocorre quando a instância não pode ser mais utilizada em nenhum trecho do código da aplicação. 
+
+O garbage collector procura instâncias elegíveis para destruição. Quando uma instância é destruída, executam-se os destrutores de todas as classes das quais a classe herdou. Por exemplo, na execução abaixo:
+
+    class First
+    { 
+	    ~First() 
+	    { 
+	    Console.WriteLine("First's destructor"); 
+	    } 
+    } 
+    
+    class Second: First 
+    { 
+	    ~Second() 
+	    { 
+		    Console.WriteLine("Second's destructor"); 
+	    } 
+    } 
+    
+    class Third: Second 
+    { 
+	    ~Third() 
+	    { 
+		    Console.WriteLine("Third's destructor"); 
+	    } 
+    } 
+    
+    class  Test 
+    { 
+    static void Main() 
+	    { 
+	    var third = new Third(); 
+	    third = null; 
+	    GC.Collect(); 
+	    GC.WaitForPendingFinalizers(); 
+	    } 
+    }
+temos o seguinte resultado:
+
+    Third's destructor
+    Second's destructor 
+    First's destructor
+Quando chamamos um destrutor, implicitamente estamos executando o seguinte:
+
+    protected override void Finalize() 
+    { 
+	    try 
+	    { 
+		    // ação do destrutor
+	    } 
+	    finally 
+	    { 
+		    base.Finalize(); 
+	    } 
+    }
+Ou seja, executamos a ação do destrutor e invocamos recursivamente o método Finalize de todas as instâncias da cadeia de herança.
