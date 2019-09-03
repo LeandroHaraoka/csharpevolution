@@ -124,7 +124,7 @@ Caso um construtor não seja definido, o C# atribui os respectivos valores defau
 
 #### Construtores de instância
 
-Além do comportamento descrito acima, um construtor de instância pode pode ser utilizado para chamar construtores de instância de base classes.
+Além do comportamento descrito acima, um construtor de instância pode ser utilizado para chamar construtores de instância de base classes.
 
     class Circle : Shape 
     {
@@ -134,8 +134,10 @@ Além do comportamento descrito acima, um construtor de instância pode pode ser
          } 
     }
     
+No exemplo acima, o construtor da classe Circle chama o construtor da base class Shape e inicia o objeto utilizando ambos os construtores. 
+
 #### Construtores privados
-Em classes onde todos os membros costuma-se encontrar construtores privados. Estes construtores possuem a função de impedir a instanciação dessas classes. Uma classe que possui apenas construtores privados, não pode ser instanciada e nem herdade por nenhuma outra classe (exceto em classes aninhadas).
+Em classes onde todos os membros são estáticos costuma-se encontrar construtores privados. Estes construtores possuem a função de impedir a instanciação dessas classes. Uma classe que possui apenas construtores privados, não pode ser instanciada e nem herdade por nenhuma outra classe (exceto em classes aninhadas).
 
 #### Construtores estáticos
 
