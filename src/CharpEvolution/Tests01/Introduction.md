@@ -205,3 +205,45 @@ Quando chamamos um destrutor, implicitamente estamos executando o seguinte:
 	    } 
     }
 Ou seja, executamos a ação do destrutor e invocamos recursivamente o método Finalize de todas as instâncias da cadeia de herança.
+
+### Condicionais
+
+Em C#, temos algumas formas de implementar instruções de seleção. Tais instruções são denominadas condicionais. Dentre elas, encontram-se estruturas como if-else, switch-case e operador ternário.
+
+#### If-else
+A estrutura if-else é utilizada com o objetivo de validar uma expressão. Com base no resultado dessa validação, definem-se dois possíveis fluxos de execução.
+Caso,  seja necessária realizar uma série de validações distintas, pode-se utilizar a estrutura if - else if - else. Neste caso, a validação de cada else-if é executada se nenhuma anterior for verdadeira. O fluxo definido no bloco else é executado apenas se nenhuma das outras validações for verdadeira.
+
+    if (Condition1) 
+    { 
+	    // Executes when condition1 is true.
+    } 
+    else if (Condition2) 
+    { 
+	    // Executes when condition1 is false and Condition2 is true. 
+    }
+    else
+    { 
+	    // Executes when condition1 and Condition2 are false.
+	}
+#### Switch-case
+
+A estrutura de seleção switch-case é apropriada para instruções onde se deseja validar uma única expressão ou variável que pode resultar em diferentes valores, sendo que para cada resultado devo executar um fluxo diferente.
+Em adição a cada instrução case pode-se adicionar uma cláusula when que define uma condição adicional na validação. Dessa forma, a instrução de cada case só é executada quando a cláusula retorna true.
+
+    switch (caseSwitch) 
+    { 
+    case 1 when (condição adicional): 
+    Console.WriteLine("Case 1"); 
+    break; 
+    case 2: 
+    Console.WriteLine("Case 2"); 
+    break; 
+    default: 
+    Console.WriteLine("Default case"); 
+    break; 
+    }
+#### Ternários
+Para validações mais simples, onde o resultado pode ser apenas verdadeiro ou falso, pode-se utilizar o operador condicional ternário. Tal operador provê redução de código, mas deve ser utilizado com cautela para não prejudicar a legibilidade.
+
+    var result = condition ? valueIfTrue : valueIfFalse
