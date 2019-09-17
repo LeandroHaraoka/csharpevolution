@@ -243,7 +243,46 @@ Em adição a cada instrução case pode-se adicionar uma cláusula when que def
     Console.WriteLine("Default case"); 
     break; 
     }
+
 #### Ternários
 Para validações mais simples, onde o resultado pode ser apenas verdadeiro ou falso, pode-se utilizar o operador condicional ternário. Tal operador provê redução de código, mas deve ser utilizado com cautela para não prejudicar a legibilidade.
 
     var result = condition ? valueIfTrue : valueIfFalse
+
+### Iterações
+
+As estruturas de loop representam maneiras de se realizar iterações com base no resultado de uma ou mais condição de teste. 
+
+#### While
+
+A estrutura ***while*** representa um laço com instruções que serão executadas enquanto uma condição for verdadeira. Tal condição é avaliada no início do laço. Portanto, antes da primeira execução a condição é validada e, caso seja falsa, o laço nem é executado.
+No exemplo abaixo, imprime-se os inteiros de 0 à 10.
+
+    int n = 0; 
+    while (n <= 10) 
+    { 
+	    Console.WriteLine(n);
+	    n++; 
+    }
+    
+#### Do
+
+A estrutura ***do*** é similar à estrutura ***while***. A única diferença é que a primeira valida a condição de teste no final do laço. Como consequência, o laço sempre é executado pelo menos uma vez, mesmo que a condição seja falsa. 
+ 
+#### For 
+
+A estrutura ***for***  permite a definição de ações que serão executadas antes e depois do laço, além da condição de teste que valida a iteração.
+A primeira seção é a ***initializer***. Nela são definidas as atribuições, métodos e instanciações que serão executadas antes do laço. Na seção ***iterator***, também são definidas atribuições, métodos e instanciações, mas que serão executadas após o laço. Na seção condition, é definida a condição de teste.
+
+    for (initializer; condition; iterator)
+	    // instruções do laço
+	    
+#### Foreach - in
+
+O foreach é uma instrução aplicável em objetos que atendem as seguintes premissas:
+
+ - Possui implementação do método GetEnumerator(), o que é válido se a classe implementar a interface IEnumerable; 
+ - O retorno do método GetEnumerator possui o campo Current público e o método MoveNext() público;
+
+Caso a instrução foreach seja aplicada em um objeto nulo, lança-se uma NullReferenceException. 
+Caso seja aplicada em um objeto vazio, a execução pula o laço.
