@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CsharpEvolution.WeeklyChallenges.Weekly01.Calculus;
+using CsharpEvolution.WeeklyChallenges.Weekly01.Home;
+using System;
+using System.Linq;
 
 namespace CsharpEvolition.WeeklyChallenges
 {
@@ -6,7 +9,10 @@ namespace CsharpEvolition.WeeklyChallenges
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Welcome to C# Evolution Calculator!");
+
+            var feature = new Calculus();
+            feature.Execute();
         }
     }
 }
