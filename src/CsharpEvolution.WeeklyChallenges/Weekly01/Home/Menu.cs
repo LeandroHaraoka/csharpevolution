@@ -10,20 +10,24 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
     {
         public void Show()
         {
-            var features = 
-                System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                    .Where(mytype => mytype.GetInterfaces().Contains(typeof(IFeature)));
-
+            var features = GetFeaturesTypes();
+        
             var featuresNames = features.Select(x => x.Name).ToList();
 
+            Console.WriteLine("Please type the desired feature.");
+
+            featuresNames.ForEach(
+                (name) => Console.WriteLine(name));
+        }
+
+        public IFeature SelectFeature()
+        {
             var featureType = null as Type;
+            var features = GetFeaturesTypes();
 
             while (featureType is null)
             {
                 Console.WriteLine("Please type the desired feature.");
-
-                featuresNames.ForEach(
-                    (name) => Console.WriteLine(name));
 
                 var chosenFeature = Console.ReadLine();
 
@@ -36,7 +40,16 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
             
             var feature = (IFeature)Activator.CreateInstance(featureType);
 
-            feature.Execute();
+            return feature;
+        } 
+
+        private IEnumerable<Type> GetFeaturesTypes()
+        {
+            var features = 
+                System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                    .Where(mytype => mytype.GetInterfaces().Contains(typeof(IFeature)));
+
+            return features;
         }
     }
 }

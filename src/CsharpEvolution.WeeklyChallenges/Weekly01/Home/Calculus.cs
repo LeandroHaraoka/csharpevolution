@@ -28,8 +28,8 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
                     .FirstOrDefault(type => type.Name.ToLower() == chosenOperation.ToLower());
             }
 
-            Console.WriteLine($"The operation {chosenOperationType.Name} was selected!");
-            var operation = (IMathOperation)Activator.CreateInstance(chosenOperationType);
+           Console.WriteLine($"The operation {chosenOperationType.Name} was selected!");
+            var operation = (IMathOperation)Activator.CreateInstance(chosenOperationType); 
         }
     }
 }

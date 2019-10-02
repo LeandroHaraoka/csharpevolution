@@ -13,6 +13,8 @@ namespace CsharpEvolition.WeeklyChallenges
 
             var menu = new Menu();
             menu.Show();
+            var feature = menu.SelectFeature();
+            feature.Execute();
         }
     }
 }
