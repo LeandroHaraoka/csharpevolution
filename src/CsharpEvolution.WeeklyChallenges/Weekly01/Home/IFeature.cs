@@ -6,5 +6,6 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
 {
     public interface IFeature
     {
+        void Execute();
     }
 }

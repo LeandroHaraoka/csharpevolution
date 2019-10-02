@@ -15,12 +15,20 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
                 System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
                     .Where(mytype => mytype.GetInterfaces().Contains(typeof(IMathOperation)));
 
-            Console.WriteLine("Please insert the desired math operation.");
-            var chosenOperation = Console.ReadLine();
+            var chosenOperationType = null as Type;
 
-            var chosenOperationType = mathOperationTypes
-                .FirstOrDefault(type => type.Name.ToLower() == chosenOperation.ToLower());
+            while (chosenOperationType is null)
+            {
+                Console.WriteLine("Please insert the desired calculus operation.");
 
+                var chosenOperation = Console.ReadLine();
+
+                chosenOperationType = mathOperationTypes
+                    .DefaultIfEmpty(null)
+                    .FirstOrDefault(type => type.Name.ToLower() == chosenOperation.ToLower());
+            }
+
+            Console.WriteLine($"The operation {chosenOperationType.Name} was selected!");
             var operation = (IMathOperation)Activator.CreateInstance(chosenOperationType);
         }
     }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CsharpEvolution.WeeklyChallenges.Weekly01.Calculus
 {
-    public class Division
+    public class Division : IMathOperation
     {
         public double FirstNumber { get; set; }
         public double SecondNumber { get; set; }

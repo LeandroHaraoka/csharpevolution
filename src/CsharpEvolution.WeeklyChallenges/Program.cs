@@ -11,8 +11,8 @@ namespace CsharpEvolition.WeeklyChallenges
         {
             Console.WriteLine("Welcome to C# Evolution Calculator!");
 
-            var feature = new Calculus();
-            feature.Execute();
+            var menu = new Menu();
+            menu.Show();
         }
     }
 }
