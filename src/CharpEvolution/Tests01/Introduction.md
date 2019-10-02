@@ -286,3 +286,83 @@ O foreach é uma instrução aplicável em objetos que atendem as seguintes prem
 
 Caso a instrução foreach seja aplicada em um objeto nulo, lança-se uma NullReferenceException. 
 Caso seja aplicada em um objeto vazio, a execução pula o laço.
+
+### Interrupção de Loops
+
+#### Break
+A instrucao break **interrompe** a execução de um loop ou switch e redireciona o fluxo de execução para a próxima instrução. A próxima instrução pode até ser um laço de fora, que continuará sendo executado quando o break for invocado. 
+
+No exemplo abaixo, quando y = x, o laço interno é interrompido, mas o externo continua.
+
+    // Laço externo  
+    for (int x = 0; x < 10; x++) 
+    { 
+	    // Laço interno  
+	    for (int y = 0; y < 10; y++) 
+	    { 
+		    if (y == x) 
+		    { 
+			    break; 
+		    } 
+	    }
+    }
+    
+#### Continue
+Ao contrário da instrucao break, o continue não interrompe a execução de um loop. Quando um continue é invocado, o laço pula para a próxima iteração sem que a iteração seja finalizada.
+
+No exemplo abaixo, enquanto *i* varia de 1 a 8 a execução pula para a próxima iteração antes de chegar no Console.WriteLine, portanto apenas os números 9 e 10 serão impressos.
+
+    for (int i = 1; i <= 10; i++) 
+    { 
+	    if (i < 9) 
+	    { 
+		    continue; 
+	    } 
+	    Console.WriteLine(i); 
+    }
+#### GoTo
+A instrução GoTo é utilizada para redirecionar a execução de um loop para uma instrução predefinida.
+
+No exemplo abaixo, quando y = x, executa-se a instrução definida por Equality e, em seguida, executa-se a instrução definida em Finish.
+
+    for (int x = 0; x < 10; x++) 
+    { 
+	    for (int y = 0; y < 10; y++) 
+	    { 
+		    if (y == x) 
+		    { 
+			    goto Equality; 
+		    } 
+	    }
+    }
+	goto Finish;
+
+    Equality: 
+	    Console.WriteLine("Equality founded.")
+
+    Finish: 
+	    Console.WriteLine("Finished execution.")
+
+O goto é comumente utilizado em switch-cases, com o intuito de executar instruções presentes em mais de um case. No exemplo abaixo, quando n = 1 cost é 25 e quando n = 2 cost é 50.
+
+    int cost = 0;
+    switch (n) 
+    { 
+	    case  1: 
+		    cost += 25; 
+		    break; 
+	
+	    case  2: 
+		    cost += 25; 
+		    goto  case  1; 
+	
+	    default: 
+		    Console.WriteLine("Invalid selection."); 
+		    break; 
+    }
+
+#### Return
+
+A instrução return é utilizada com o intuito de finalizar a execução de um método. Quando executado, o return redireciona o fluxo de execução para o método de chamada (aquele que chamou o método no qual o return se encontra). 
+
+Caso a instrução return esteja dentro de um bloco try, o bloco finally será executado antes do fluxo voltar para o método de chamada.
