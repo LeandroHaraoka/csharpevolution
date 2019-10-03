@@ -39,7 +39,6 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
                 var chosenFeature = Console.ReadLine();
 
                 featureType = _features
-                    .DefaultIfEmpty(null)
                     .FirstOrDefault(type => type.Name.ToLower() == chosenFeature.ToLower());
             }
 

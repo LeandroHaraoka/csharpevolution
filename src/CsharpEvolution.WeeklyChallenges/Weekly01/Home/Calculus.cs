@@ -35,7 +35,6 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
         {
             var hasInitialValue = false;
             var accumulatedValue = 0.0;
-
             while (!hasInitialValue)
             {
                 Console.WriteLine("Please insert the initial value.");
@@ -55,8 +54,7 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
                         return;
 
                     chosenOperationType = _operations
-                    .DefaultIfEmpty(null)
-                    .FirstOrDefault(type => type.Name.ToLower() == chosenOperation.ToLower());
+                        .FirstOrDefault(type => type.Name.ToLower() == chosenOperation.ToLower());
                 }
 
                 var operation = (ICalculusOperation)Activator.CreateInstance(chosenOperationType);
