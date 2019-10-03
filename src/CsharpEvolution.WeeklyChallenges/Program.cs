@@ -9,12 +9,22 @@ namespace CsharpEvolition.WeeklyChallenges
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to C# Evolution Calculator!");
+            Console.WriteLine("Welcome to C# Evolution Calculator!\n");
 
             var menu = new Menu();
-            menu.Show();
-            var feature = menu.SelectFeature();
-            feature.Execute();
+
+            var feature = null as IFeature;
+
+            while (feature is null || feature.GetType() != typeof(Exit))
+            {
+                menu.Show();
+                feature = menu.SelectFeature();
+               
+                if(feature.GetType() != typeof(Exit))
+                    ((ICalculatorFeature)feature).Show();
+                
+                feature.Execute();
+            }
         }
     }
 }

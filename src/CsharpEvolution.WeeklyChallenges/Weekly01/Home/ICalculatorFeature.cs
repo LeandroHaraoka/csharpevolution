@@ -8,4 +8,9 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
     {
         void Execute();
     }
+
+    public interface ICalculatorFeature : IFeature
+    {
+        void Show();
+    }
 }

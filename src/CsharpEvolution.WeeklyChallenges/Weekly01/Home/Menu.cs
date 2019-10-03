@@ -14,10 +14,11 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
         
             var featuresNames = features.Select(x => x.Name).ToList();
 
-            Console.WriteLine("Please type the desired feature.");
-
+            Console.WriteLine("\nThis calculator has the below features.");
+            Console.WriteLine("========================================");
             featuresNames.ForEach(
-                (name) => Console.WriteLine(name));
+                (name) => Console.WriteLine($"- {name}"));
+            Console.WriteLine("========================================\n");
         }
 
         public IFeature SelectFeature()
@@ -36,7 +37,7 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
                     .FirstOrDefault(type => type.Name.ToLower() == chosenFeature.ToLower());
             }
 
-            Console.WriteLine($"The feature {featureType.Name} was selected!");
+            Console.WriteLine($"The feature {featureType.Name} was selected!\n");
             
             var feature = (IFeature)Activator.CreateInstance(featureType);
 
@@ -47,7 +48,7 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
         {
             var features = 
                 System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                    .Where(mytype => mytype.GetInterfaces().Contains(typeof(IFeature)));
+                    .Where(mytype => mytype.GetInterfaces().Contains(typeof(IFeature)) && !mytype.IsInterface);
 
             return features;
         }

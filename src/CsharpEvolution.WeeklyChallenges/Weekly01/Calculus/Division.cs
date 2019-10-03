@@ -4,14 +4,14 @@ using System.Text;
 
 namespace CsharpEvolution.WeeklyChallenges.Weekly01.Calculus
 {
-    public class Division : IMathOperation
+    public class Division : ICalculusOperation
     {
         public double FirstNumber { get; set; }
         public double SecondNumber { get; set; }
 
-        public static double Calculate(double firstNumber, double secondNumber)
+        public double Calculate()
         {
-            return firstNumber / secondNumber;
+            return FirstNumber / SecondNumber;
         }
     }
 }
