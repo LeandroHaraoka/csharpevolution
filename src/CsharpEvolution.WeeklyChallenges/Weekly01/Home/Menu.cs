@@ -8,11 +8,18 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
 {
     public class Menu
     {
+        private readonly IEnumerable<Type> _features;
+
+        public Menu()
+        {
+            _features = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                    .Where(mytype => mytype.GetInterfaces()
+                        .Contains(typeof(IFeature)) && !mytype.IsInterface);
+        }
+
         public void Show()
         {
-            var features = GetFeaturesTypes();
-        
-            var featuresNames = features.Select(x => x.Name).ToList();
+            var featuresNames = _features.Select(x => x.Name).ToList();
 
             Console.WriteLine("\nThis calculator has the below features.");
             Console.WriteLine("========================================");
@@ -24,7 +31,6 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
         public IFeature SelectFeature()
         {
             var featureType = null as Type;
-            var features = GetFeaturesTypes();
 
             while (featureType is null)
             {
@@ -32,7 +38,7 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
 
                 var chosenFeature = Console.ReadLine();
 
-                featureType = features
+                featureType = _features
                     .DefaultIfEmpty(null)
                     .FirstOrDefault(type => type.Name.ToLower() == chosenFeature.ToLower());
             }
@@ -43,14 +49,5 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
 
             return feature;
         } 
-
-        private IEnumerable<Type> GetFeaturesTypes()
-        {
-            var features = 
-                System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                    .Where(mytype => mytype.GetInterfaces().Contains(typeof(IFeature)) && !mytype.IsInterface);
-
-            return features;
-        }
     }
 }

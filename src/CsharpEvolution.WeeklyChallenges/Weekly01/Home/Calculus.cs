@@ -9,11 +9,19 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
 
     public class Calculus : ICalculatorFeature
     {
+        private readonly IEnumerable<Type> _operations;
+
+        public Calculus()
+        {
+            _operations = 
+                System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                    .Where(mytype => mytype.GetInterfaces()
+                        .Contains(typeof(ICalculusOperation)));
+        }
+
         public void Show()
         {
-            var operations = GetCalculusOperations();
-
-            var operationsNames = operations.Select(x => x.Name).ToList();
+            var operationsNames = _operations.Select(x => x.Name).ToList();
 
             Console.WriteLine("The calculus feature has the below operations.");
             Console.WriteLine("========================================");
@@ -25,12 +33,7 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
 
         public void Execute()
         {
-            var mathOperationTypes = GetCalculusOperations();
-
-            var chosenOperationType = null as Type;
-
             var hasInitialValue = false;
-
             var accumulatedValue = 0.0;
 
             while (!hasInitialValue)
@@ -39,24 +42,26 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
                 hasInitialValue = double.TryParse(Console.ReadLine(), out accumulatedValue);
             }
 
+            var chosenOperationType = null as Type;
             while (chosenOperationType is null)
             {
-                Console.WriteLine("Please insert the desired calculus operation.");
+                while (chosenOperationType is null)
+                {
+                    Console.WriteLine("Please insert the desired calculus operation.");
 
-                var chosenOperation = Console.ReadLine();
+                    var chosenOperation = Console.ReadLine();
 
-                if (chosenOperation.ToLower() == "exit")
-                    return;
+                    if (chosenOperation.ToLower() == "exit")
+                        return;
 
-                chosenOperationType = mathOperationTypes
-                .DefaultIfEmpty(null)
-                .FirstOrDefault(type => type.Name.ToLower() == chosenOperation.ToLower());
+                    chosenOperationType = _operations
+                    .DefaultIfEmpty(null)
+                    .FirstOrDefault(type => type.Name.ToLower() == chosenOperation.ToLower());
+                }
 
                 var operation = (ICalculusOperation)Activator.CreateInstance(chosenOperationType);
 
-                operation.FirstNumber = accumulatedValue;
-
-                GetOperationParameters(operation);
+                InitializeOperation(operation, accumulatedValue);
 
                 accumulatedValue = operation.Calculate();
 
@@ -66,28 +71,19 @@ namespace CsharpEvolution.WeeklyChallenges.Weekly01.Home
             }
         }
 
-        private IEnumerable<Type> GetCalculusOperations()
-        {
-            var operations =
-                System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                    .Where(mytype => mytype.GetInterfaces().Contains(typeof(ICalculusOperation)));
-
-            return operations;
-        }
-
-        private void GetOperationParameters(ICalculusOperation operationType)
+        private void InitializeOperation(ICalculusOperation operationType,
+            double firstNumber)
         {
             //TODO: Quando existirem operações com mais de 2 parâmetros, tornar este método mais flexível.           
             bool hasAllParameters = false;
-            double secondParameter = 0.0;
-            
+            operationType.FirstNumber = firstNumber;
+
             while (!hasAllParameters)
             {
                 Console.WriteLine("Please insert the second parameter.");
-                hasAllParameters = double.TryParse(Console.ReadLine(), out secondParameter);
+                hasAllParameters = double.TryParse(Console.ReadLine(), out var secondNumber);
+                operationType.SecondNumber = secondNumber;
             }
-
-            operationType.SecondNumber = secondParameter;
         }
     }
 }
