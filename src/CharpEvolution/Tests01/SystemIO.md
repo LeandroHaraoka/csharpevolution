@@ -1,0 +1,3 @@
+# SystemIO
+
+O namespace System.IO é constituído de classes que fornecem ferramentas para gerenciamento de fluxo de dados. Tais fluxos podem ser do tipo leitura e escrita de arquivos, transferência de dados em rede e troca de dados em memória. Para cada categora de fluxo de dados existem classes responsáveis pelo gerenciamento, como FileStream, NetworkStream e MemoryStream. Estas classes herdam comportamentos da classe abstrata Stream, que define propriedades e métodos pertinentes ao fluxo de dados. Além disso, existem algumas classes que herdam de Stream que fornecem extensões às funcionalidades básicas. 
