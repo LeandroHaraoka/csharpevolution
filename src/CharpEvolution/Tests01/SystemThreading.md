@@ -42,5 +42,5 @@ Uma tarefa é algo que a aplicação deseja fazer. Mais especificamente, é um c
 
 Em .NET, uma task é uma operação assíncrona. Isto é, a execução é independente de outros processos e pode ocorrer de forma separada e simultânea.
 
-As threads, descritas no tópico anterior, são mecanismos que permitem concluir as operaçãos das tasks. Basicamente, eles dividem as tarefas em blocos menores alocando-os em threads separadas. A classe ThreadPool fornece à aplicação threads de segundo plano. Quando iniciamos uma operação assíncrona (task), o framework é capaz de gerenciar o pool de threads, enfileirando as tarefas e alocando-as de acordo com a disponibilidade do pool de threads.  
+As threads, descritas no tópico anterior, são mecanismos que permitem concluir as operaçãos das tasks. Basicamente, eles dividem as tarefas em blocos menores alocando-os em threads separadas. A classe ThreadPool fornece à aplicação um conjunto de threads de segundo plano. Quando iniciamos uma operação assíncrona (task), o framework é capaz de gerenciar o pool de threads, enfileirando as tarefas e alocando-as de acordo com a disponibilidade do pool de threads.  
 
