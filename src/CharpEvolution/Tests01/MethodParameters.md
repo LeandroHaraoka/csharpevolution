@@ -62,5 +62,42 @@ Porém, caso seja atribuído um novo endereço à variável dentro do método, a
         parametro.Xpto= 2; //Não altera referência original, pois atribuiu-se uma nova referência à variável.
     } 
     
-### Passing a value/reference type by reference
+## Passing a value/reference type by reference
 Existem mais de uma maneira de se passar um tipo valor/referência por referência. É possível passar um tipo por referência através de modificadores de parâmetros como *in*, *out* e *ref*.
+
+## Reference local variables
+É muito comum copiarmos variáveis locais da seguinte maneira:
+
+    Pessoa pessoa2 = pessoa1;
+
+Porém, podemos realizar a seguinte operaçao:
+
+    ref Pessoa pessoa2 = ref pessoa1;
+    
+A linha acima realiza uma cópia da referência da variável, e não do conteúdo da referência. Em alguns casos, pode-se ganhar performance considerável copiando a referência ao invés de copiar todo o seu conteúdo.
+
+## Reference return
+
+Um referece return consiste em um método que retorna uma referência de um objeto.
+
+Limitações:
+
+ - Não é possível retornar uma referẽncia nula. Porém, pode-se retornar uma referência cujo valor é nulo.
+ - O tempo de vida do objeto deve exceder o tempo de vida do método. Portanto, deve-se retornar uma instância, um field estático ou um argumento que foi recebido pelo método. Pelo mesmo motivo, não se pode utilizar reference return em métodos assíncronos.
+
+Nos exemplos abaixo, considere que o metodo retorna uma referência de um objeto do tipo Pessoa.
+
+
+    public ref Pessoa Metodo() 
+    {
+	    var pessoa = new Pessoa();
+	    return ref pessoa; 
+    }
+    
+Quando passamos o retorno do método para uma local variable,  como na linha a seguir, estamos criando uma nova variável que contém a refêrencia retornada.  
+
+    Pessoa pessoa = Metodo();
+Porém, podemos passar o resultado para uma reference local variable, conforme abaixo. Quando fazemos isso, estamos fazendo com que a variável pessoa seja apenas um alias para o retorno do método.
+
+    ref Pessoa pessoa = ref Metodo();
+No primeiro caso, se alterarmos a variável pessoa, o conteúdo interno do método não é alterado. Já no segundo, alterando a variável pessoa, estamos alterando diretamente a variável interna ao método, dado que pessoa é apenas um alias para ela.
