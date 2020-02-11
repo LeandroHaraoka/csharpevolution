@@ -33,6 +33,7 @@ Outra forma de inicializar um delegate é por meio de métodos anônimos.
 	    }
     }
 No exemplo, atribui-se à variável result uma função que simplesmente executa um print quando result for executado. Note que o parâmetro *message* é acessível de dentro do corpo do delegate.
+
 Apesar de ser uma das maneiras de inicializar um delegate, esta caiu em desuso com a chegada das lambas expressions na versão C#3 .
 
 ## Delegate Compatibility
@@ -50,4 +51,5 @@ O conceito de compatibilidade de delegates permite que um novo delegate seja cri
 
     Printer printer = new Printer(generalPrinter);
 Note que um delegate Printer recebe e retorna valores do tipo string, assim como a função PrintAnything. Suponha então que inicializamos um delegate Printer.
+
 A partir de Printer, podemos inicializar um novo delegate, GenericPrinter, pois os tipos diferentes de delegates possuem assinaturas compatíveis.
