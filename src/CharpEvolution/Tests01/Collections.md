@@ -102,4 +102,19 @@ Podemos operar em uma LinkedList da seguitne forma:
 
 A estrutura ArrayList implementa a interface IList e armazena dados do tipo object. A ArrayList é um array com tamanho dinâmico podendo ser incrementado sob demanda.
 
-Esta estrutura era comumente utilizada antes da chegada dos generics (List<T>). 
+Esta estrutura era comumente utilizada antes da chegada dos generics (List<T>).  Uma arraylist pode ser instanciada e manipulada da seguinte forma por exemplo:
+
+    var  arrayList = new  ArrayList();
+    arrayList.Add("Numbers");
+    arrayList.Add(1);
+    arrayList.AddRange(new  int[] {2, 3, 4});
+
+## SortedList
+
+Uma SortedList é uma sequência de key value pair, ordenados com base nos valores das keys. Cada elemento pode ser acessado através da sua key ou do seu índice na sequência. Quando inserimos um elemento na sorted list, ele já é adicionado na ordenaçãao correta. O exemplo mostra como criar e adionar valores na SortedList.
+
+    var  sortedList = new  SortedList<string, string>();
+    sortedList.Add("3", "Marcos");
+    sortedList.Add("2", "Julia");
+    sortedList.Add("1", "Pedro");
+
