@@ -42,7 +42,8 @@ Iniciaremos as data structures pelas não genéricas.
 TODO: adicionar image non generic structures
 
 ## Array
-A estrutra Array (matriz) permite armazenamento sequencial de dados de um mesmo tipo. 
+
+A estrutra Array (matriz) é uma coleção que implementa a interface IList, permitindo armazenamento sequencial de dados de um mesmo tipo. 
 
 A dimensão e o comprimento de cada dimensão não podem ser alterados após a instanciação da array.
 
@@ -111,10 +112,54 @@ Esta estrutura era comumente utilizada antes da chegada dos generics (List<T>). 
 
 ## SortedList
 
-Uma SortedList é uma sequência de key value pair, ordenados com base nos valores das keys. Cada elemento pode ser acessado através da sua key ou do seu índice na sequência. Quando inserimos um elemento na sorted list, ele já é adicionado na ordenaçãao correta. O exemplo mostra como criar e adionar valores na SortedList.
+Uma SortedList é uma sequência de key value pair ordenados com base nos valores das keys. Ela implementa a interface IDictionary. Cada elemento pode ser acessado através da sua key ou do seu índice na sequência. Quando inserimos um elemento na sorted list, ele já é adicionado na ordenaçãao correta. O exemplo mostra como criar e adionar valores na SortedList.
 
     var  sortedList = new  SortedList<string, string>();
     sortedList.Add("3", "Marcos");
     sortedList.Add("2", "Julia");
     sortedList.Add("1", "Pedro");
 
+## Dictionary
+
+Dictionary é uma coleção de pares chave-valor que implementa a interface IDictionary.
+
+	var phoneBook =  new Dictionary<string, string>()
+    {
+		{"Larissa", "(11) 94826-5436"},
+        {"Manuel", "(11) 95883-1853"},
+        {"Fernando", "(11) 93057-1779"}
+    };
+
+O dictionary não permite a inserção de chaves duplicadas. 
+
+    phoneBook.Add("Larissa", "(11) 96666-4533");
+    
+Caso a operação acima seja executada, lança-se uma exceção do tipo *ArgumentException*. Pode-se utilizar o método ContainsKey antes de realizar uma inserção, para evitar o lançamento da exceção.
+
+Porém, são permitidas alterações no valor de uma chave existente . No comando abaixo, altera-se o valor correspondente à chave "Larrisa".
+
+    phoneBook["Larissa"] = "(11) 99999-5555";
+
+Também lança-se uma exception, do tipo *KeyNotFoundException*, caso tentamos acessar uma chave que não existe no dictionary. Caso se deseja evitar o lançamento de exceções, é mais adequado utilizar o método TryGetValue do dictionary.
+
+## Hashtable
+A Hashtable, assim como o Dictionary, é uma coleção de pares chave-valor. As duas estruturas são utilizadas em contextos similares, mas apresentam diferenças relevantes. A Hashtable não é uma estrutura do tipo genética, diferentemente do dictionary, e não garante a segurança de tipos das chaves e dos valores, os pares são do tipo <object, object>. O exemplo abaixo demonstra a instanciação de uma Hashtable e a adição de um elemento com valor com tipo diferente dos outros.
+
+    Hashtable  phoneBook = new  Hashtable()
+    {
+	    {"Larissa", "(11) 94826-5436"},
+	    {"Manuel", "(11) 95883-1853"},
+	    {"Fernando", "(11) 93057-1779"}
+    };
+    phoneBook.Add("Maria", 12345);
+
+As chaves de uma hashtable também não podem ser duplicadas. Porém, a consulta de uma chave difere do dictionary por não lançar uma exception quando a chave não é encontrada, mas sim retornar nulo.
+
+## Hashset
+
+O Hashset é uma estrutura genérica que contém uma coleção de valores únicos. Quando tenta-se adicionar, pelo método Add, um valor já existente na coleção, retorna-se um boleano com valor igual a falso. 
+A hashset conta com operações matemáticas, pode-se por exemplo encontrar a união e a intersecção entre duas coleções do tipo hashset.
+
+    HashSet<int> usedCoupons = new  HashSet<int>();
+    var firstInsertion = usedCoupons.Add(1);
+    var secondInsertion = usedCoupons.Add(1); // Esta execução retorna um boleano falso.
