@@ -163,3 +163,19 @@ A hashset conta com operações matemáticas, pode-se por exemplo encontrar a un
     HashSet<int> usedCoupons = new  HashSet<int>();
     var firstInsertion = usedCoupons.Add(1);
     var secondInsertion = usedCoupons.Add(1); // Esta execução retorna um boleano falso.
+
+## Stack
+
+A estrutura Stack representa uma coleção de elementos que segue a lógica FIFO (last-in-first-out), o que significa que o único elemento acessível é o último que foi adicionado à coleção.
+
+    Stack<int> stack = new  Stack<int>();
+Pode-se realizar uma operação de inserção por meio do método Push, como abaixo.
+
+    stack.Push(number);
+    
+O acesso é realizado pelo método Peek.
+
+    var valueFromTop = stack.Peek();
+Também pode-se remover um valor de uma stack (o último valor adicionado) com o método Pop.
+
+    var removedValue = stack.Pop();
