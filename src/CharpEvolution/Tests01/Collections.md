@@ -166,7 +166,7 @@ A hashset conta com operações matemáticas, pode-se por exemplo encontrar a un
 
 ## Stack
 
-A estrutura Stack representa uma coleção de elementos que segue a lógica FIFO (last-in-first-out), o que significa que o único elemento acessível é o último que foi adicionado à coleção.
+A estrutura Stack representa uma coleção de elementos que segue a lógica LIFO (last-in-first-out), o que significa que o único elemento acessível é o último que foi adicionado à coleção.
 
     Stack<int> stack = new  Stack<int>();
 Pode-se realizar uma operação de inserção por meio do método Push, como abaixo.
@@ -176,6 +176,24 @@ Pode-se realizar uma operação de inserção por meio do método Push, como aba
 O acesso é realizado pelo método Peek.
 
     var valueFromTop = stack.Peek();
-Também pode-se remover um valor de uma stack (o último valor adicionado) com o método Pop.
+
+A remoção dos elementos de uma stack seguem também a lógica LIFO (remove o último valor adicionado) com o método Pop.
 
     var removedValue = stack.Pop();
+Pode-se ainda limpar a stack utilizando o método Clear.
+
+    stack.Clear();
+
+## Queue
+
+A queue é uma coleção de elementos que segue a lógica FIFO (first-in-first-out), o que significa que o acesso aos elementos é permitido por ordem de chegada.
+Pode-se instanciar uma queue e adicionar elementos nela da seguinte maneira:
+
+    var calls = new Queue<IncomingCall>();
+    var call = new IncomingCall();
+    calls.Enqueue(call);
+
+A consulta e a retirada de um elemento da queue são apresentadas abaixo:
+
+    var peekCall = calls.Peek();
+    var dequeuedCall = calls.Dequeue();
