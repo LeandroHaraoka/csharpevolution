@@ -20,4 +20,4 @@ Um detalhe, se uma base class implementa uma interface, qualquer classe que herd
 
 O uso de interfaces proporciona a definição de contratos que organizam o código. Não é necessário conhecer a implementação de um método para utilizá-lo e a implementação pode sofrer alterações sem impactar o consumidor do método.
 
-Markdown selection 865 bytes 128 words 11 lines Ln 12, Col 230HTML 720 characters 127 words 6 paragraphs
+Quando implementamos os métodos de uma interface não podemos utilizar modificadores de acesso diferentes de public. Todos os métodos devem ser expostos. Caso haja a necessidade de encapsular métodos, uma classe abstrata e acompanahda de herança seria uma solução mais adequada. 
