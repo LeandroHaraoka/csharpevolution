@@ -368,3 +368,4 @@ O goto é comumente utilizado em switch-cases, com o intuito de executar instru�
 A instrução return é utilizada com o intuito de finalizar a execução de um método. Quando executado, o return redireciona o fluxo de execução para o método de chamada (aquele que chamou o método no qual o return se encontra). 
 
 Caso a instrução return esteja dentro de um bloco try, o bloco finally será executado antes do fluxo voltar para o método de chamada.
+
