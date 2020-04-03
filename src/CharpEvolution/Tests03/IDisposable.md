@@ -1,9 +1,10 @@
 # IDisposable
+
 A interface IDisposable possui funcionalidades que garantem "clean up" de recursos da memória que não são mais utilizados pela aplicação.
 
 O garbage collector já realiza o clean up citado, porém não se pode prever quando será executado. Além disso, existem recursos que não são gerenciados por ele, como arquivos abertos e streams.
 
-Existem o Dispose Pattern que é um padrão para a implementação da interface IDisposable em recursos que permitem heranças (não são sealed).
+Abaixo apresentaremos o Dispose Pattern que é um padrão para a implementação da interface IDisposable em recursos que permitem heranças (não são sealed).
 
 Para base classes: 
  - A base class deve conter um método público não virtual Dispose() e um método protected virtal Dispose(bool disposing).
@@ -26,7 +27,7 @@ public class BaseClass : IDisposable
    public void Dispose()
    { 
       Dispose(true);
-      GC.SuppressFinalize(this);           
+      GC.SuppressFinalize(this); // O recurso será limpado pelo método Dispose, invocado acima. Com essa instrução do GC, retiramos o recurso da fila de finalização para que ele não ocorra uma segunda tentativa de limpeza do recurso.
    }
    
 	protected virtual void Dispose(bool disposing)
