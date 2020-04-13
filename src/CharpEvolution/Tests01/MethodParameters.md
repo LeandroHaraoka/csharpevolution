@@ -42,7 +42,6 @@ Quando utilizada a palavra-chave *params* indica-se que o método recebe uma qua
     } 
 
 
-    
 ## Passing parameters by value
 Os parâmetros podem ser passados de duas maneiras: por valor ou via referência. Por default, eles são passados por valor.
 
@@ -50,10 +49,9 @@ Os parâmetros podem ser passados de duas maneiras: por valor ou via referência
 Quando passamos um tipo valor por valor para um método, realizamos uma cópia do conteúdo que, dentro do método, será manipulada sem que haja alterações no conteúdo original. Ou seja, o conteúdo do argumento que foi definido pelo método "caller" não é alterado, mas o conteúdo do parâmetro do método "called" é alterado.
 
 ### Passing a reference type by value
-Quando passamos um tipo referência por valor para um método, realizamos uma cópia da referência. Quando realiza-se uma alteração no conteúdo do parâmetro dentro do método, a alteração se reflete no conteúdo da referência original fora do método, pois o parâmetro carrega o mesmo endereço de mémória que o argumento enviado pelo método "caller".
-Porém, caso seja atribuído um novo endereço à variável dentro do método, as alterações deixarão de ser refletidas no conteúdo da referência original fora do método, pois alterou-se o endeço de memória da variável.
+Quando passamos um tipo referência por valor para um método, realizamos uma cópia da referência. Quando realiza-se uma alteração no conteúdo do parâmetro dentro do método, a alteração se reflete fora do método, no conteúdo da referência original, pois o parâmetro carrega o mesmo endereço de mémória que o argumento enviado pelo método "caller".
+Porém, caso seja atribuído um novo endereço à variável dentro do método, as alterações deixarão de ser refletidas apenas dentro do método e não mais na referência original, pois alterou-se o endeço de memória da variável.
    
-
     private void Method(object parametro)  
     {  
         parametro.Xpto= 1; //Altera referência original.
@@ -61,43 +59,73 @@ Porém, caso seja atribuído um novo endereço à variável dentro do método, a
 		parametro = new Object();
         parametro.Xpto= 2; //Não altera referência original, pois atribuiu-se uma nova referência à variável.
     } 
-    
-## Passing a value/reference type by reference
+
+## Passing parameters by reference
+
+### Passing a value/reference type by reference
 Existem mais de uma maneira de se passar um tipo valor/referência por referência. É possível passar um tipo por referência através de modificadores de parâmetros como *in*, *out* e *ref*.
 
-## Reference local variables
-É muito comum copiarmos variáveis locais da seguinte maneira:
+Quando passamos um tipo valor via referência, estamos passando o endereço de memória que contém os dados do argumento. Caso seja realizada alguma alteração dentro do método, o conteúdo original de fora também é alterado, pois ambos compartilham o mesmo endereço de memória. 
 
-    Pessoa pessoa2 = pessoa1;
+O mesmo acontece quando passamos via referência. Se passarmos um tipo referência via referência e, dentro do método, alocarmos um novo objeto no parâmetro, o conteúdo original de fora também será alterado, pois ambos compartilham o mesmo endereço de memória.
 
-Porém, podemos realizar a seguinte operaçao:
+#### ref
+A keyword *ref* é utilizada na assinatura e na invocação do método que recebe um parâmetro via referência.  É obrigatório inicializar o argumento que será passado.
 
-    ref Pessoa pessoa2 = ref pessoa1;
-    
-A linha acima realiza uma cópia da referência da variável, e não do conteúdo da referência. Em alguns casos, pode-se ganhar performance considerável copiando a referência ao invés de copiar todo o seu conteúdo.
-
-## Reference return
-
-Um referece return consiste em um método que retorna uma referência de um objeto.
-
-Limitações:
-
- - Não é possível retornar uma referẽncia nula. Porém, pode-se retornar uma referência cujo valor é nulo.
- - O tempo de vida do objeto deve exceder o tempo de vida do método. Portanto, deve-se retornar uma instância, um field estático ou um argumento que foi recebido pelo método. Pelo mesmo motivo, não se pode utilizar reference return em métodos assíncronos.
-
-Nos exemplos abaixo, considere que o metodo retorna uma referência de um objeto do tipo Pessoa.
-
-
-    public ref Pessoa Metodo() 
-    {
-	    var pessoa = new Pessoa();
-	    return ref pessoa; 
+    public void Metodo(ref int argumento) 
+    { 
+	    argumento += 1; 
     }
     
-Quando passamos o retorno do método para uma local variable,  como na linha a seguir, estamos criando uma nova variável que contém a refêrencia retornada.  
+    int number = 1; 
+    Metodo(ref number);
 
-    Pessoa pessoa = Metodo();
-Porém, podemos passar o resultado para uma reference local variable, conforme abaixo. Quando fazemos isso, estamos fazendo com que a variável pessoa seja apenas um alias para o retorno do método.
+Quando passamos um tipo valor por referência, estamos passando um ponteiro que aponta para o valor. Caso o parâmetro sofra modificação dentro do escopo método, a alteração será refletida na variável fora deste escopo. 
 
-    ref Pessoa pessoa = ref Metodo();
-No primeiro caso, se alterarmos a variável pessoa, o conteúdo interno do método não é alterado. Já no segundo, alterando a variável pessoa, estamos alterando diretamente a variável interna ao método, dado que pessoa é apenas um alias para ela.
+Quando passamos um tipo referência por referência, estamos passando o endereço de memória no qual o objeto está armazenado. Caso, dentro do escopo do método, o valor do parâmetro seja modificado para um outro endereço de memória, tal alteração se refletirá fora do escopo.
+
+#### out
+A keyword também pode ser utilizada para passar parâmetros via referência. A diferença em relação a *ref* é a não obrigatoriedade de inicialização do argumento fora do método.
+
+    public void Metodo(out int argumento) 
+    { 
+	    argumento = 10; 
+    }
+    
+    Metodo(out int number);
+    // Apos execucao do metodo, number sera igual a 10.
+
+#### in
+A terceira forma de passarmos um argumento via referência é através da keyword *in*. A diferença em relação a *ref* é a que não se pode alterar de dentro do método o conteúdo do parâmetro. 
+No caso do tipo valor, não se pode alterar o valor alocado no endereço do parâmetro. No caso do tipo referência, não se pode alocar uma nova referência no endereço do parâmetro.  
+
+Ex: Tipo Valor
+
+    int number = 1;
+    Metodo(number); 
+
+    public void Metodo(in int number) 
+    { 
+	    number = 2; // Gera erro
+    }
+
+Ex: Tipo Referência
+
+    Pessoa p = new Pessoa { Name = Maria };
+    Metodo(p); 
+    
+    public void Metodo(in Pessoa p) 
+    { 
+	    p.Name = Jose; // Nao gera erro
+	    p = new Pessoa(); // Gera erro
+    }
+
+#### Limitações
+
+Não é possível usar ref, in e out em métodos assíncros e nem em métodos que possuem yield return ou yield break.
+
+#### Resumo
+
+*ref*: utilizar em métodos que **possam alterar o conteúdo** do parâmetro.
+*out*: utilizar em métodos que **devem inicializar** o parâmetro.
+*in*: utilizar em métodos que **não possam alterar o conteúdo** do parâmetro.
