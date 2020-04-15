@@ -6,6 +6,7 @@ namespace Events
     {
         public WorkListener()
         {
+            // Subscribe to event WorkDone.
             Worker.GetInstance().WorkDone += 
                 (sender, eventArgs) =>
                 {

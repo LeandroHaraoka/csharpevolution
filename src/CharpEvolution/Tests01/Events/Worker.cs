@@ -14,8 +14,10 @@ namespace Events
             return _Instance;
         }
 
+        // Creates event.
         public event EventHandler<WorkDoneEventArgs> WorkDone;
 
+        // Raise event.
         public void OnWorkDone(object sender, string name)
         {
             var workDoneDelegate =  WorkDone as EventHandler<WorkDoneEventArgs>;
